@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="600" d:Width="600"
         DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
-        WindowState="Maximized">
+        WindowState="Maximized" SizeChanged="Window_SizeChanged">
     <Grid Margin="5">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -34,8 +34,8 @@
             </DataGrid.CellStyle>
         </DataGrid>
 
-        <Canvas x:Name="map" Grid.Row="1" Margin="5">
-            <Thumb Width="200" Height="200"
+        <Canvas Grid.Row="1" Margin="5">
+            <Thumb x:Name="map" Width="200" Height="200"
                    Canvas.Right="0"
                    Canvas.Bottom="0"
                    DragStarted="Thumb_DragStarted"
@@ -56,8 +56,8 @@
                                     <Thumb Width="50" Height="50"
                                            Canvas.Left="0"
                                            Canvas.Top="0"
-                                           DragStarted="Thumb_DragStarted"
-                                           DragCompleted="Thumb_DragCompleted"
+                                           DragStarted="Thumb_DragStarted2"
+                                           DragCompleted="Thumb_DragCompleted2"
                                            DragDelta="Thumb_DragDelta2">
                                         <Thumb.Template>
                                             <ControlTemplate>

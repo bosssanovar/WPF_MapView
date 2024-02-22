@@ -232,6 +232,37 @@ namespace WpfApp1
             }
         }
 
+
+        private void Thumb_DragStarted2(object sender, DragStartedEventArgs e)
+        {
+            var thumb = sender as Thumb;
+            if (null != thumb)
+            {
+                var border = thumb.Template.FindName("Thumb_Border", thumb) as Border;
+                if (null != border)
+                {
+                    border.BorderThickness = new Thickness(1);
+
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void Thumb_DragCompleted2(object sender, DragCompletedEventArgs e)
+        {
+            var thumb = sender as Thumb;
+            if (null != thumb)
+            {
+                var border = thumb.Template.FindName("Thumb_Border", thumb) as Border;
+                if (null != border)
+                {
+                    border.BorderThickness = new Thickness(0);
+
+                    e.Handled = true;
+                }
+            }
+        }
+
         private void Thumb_DragDelta2(object sender, DragDeltaEventArgs e)
         {
             var thumb = sender as Thumb;
@@ -254,6 +285,12 @@ namespace WpfApp1
 
                 e.Handled = true;
             }
+        }
+
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            Canvas.SetRight(map, 0);
+            Canvas.SetBottom(map, 0);
         }
     }
 }
