@@ -33,5 +33,46 @@
                 </Style>
             </DataGrid.CellStyle>
         </DataGrid>
+
+        <Canvas x:Name="map" Grid.Row="1" Margin="5">
+            <Thumb Width="200" Height="200"
+                   Canvas.Right="0"
+                   Canvas.Bottom="0"
+                   DragStarted="Thumb_DragStarted"
+                   DragCompleted="Thumb_DragCompleted"
+                   DragDelta="Thumb_DragDelta">
+                <Thumb.Template>
+                    <ControlTemplate>
+                        <Border x:Name="Thumb_Border" BorderBrush="Red" BorderThickness="0" Background="#99000000">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                
+                                <TextBlock Margin="5" HorizontalAlignment="Center" Text="全体マップ" Foreground="White"/>
+                                
+                                <Canvas x:Name="thumb" Grid.Row="1" Margin="5">
+                                    <Thumb Width="50" Height="50"
+                                           Canvas.Left="0"
+                                           Canvas.Top="0"
+                                           DragStarted="Thumb_DragStarted"
+                                           DragCompleted="Thumb_DragCompleted"
+                                           DragDelta="Thumb_DragDelta2">
+                                        <Thumb.Template>
+                                            <ControlTemplate>
+                                                <Border x:Name="Thumb_Border" BorderBrush="Red" BorderThickness="0" Background="#99000000">
+                                                    
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Canvas>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Thumb.Template>
+            </Thumb>
+        </Canvas>
     </Grid>
 </Window>
