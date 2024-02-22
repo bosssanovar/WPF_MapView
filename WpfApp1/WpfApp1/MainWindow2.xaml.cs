@@ -175,7 +175,7 @@ namespace WpfApp1
 
         #endregion
 
-        #region 全体マップ
+        #region ミニマップ
 
         #region 表示位置
 
