@@ -36,11 +36,16 @@ namespace WpfApp1
         {
             base.OnContentRendered(e);
 
+            Cursor = Cursors.Wait;
+
             InitColumns(InitCulumnCount);
 
             grid.Visibility = Visibility.Visible;
 
-            App.Current.MainWindow = this;
+            Dispatcher.InvokeAsync(() =>
+            {
+                Cursor = null;
+            }, System.Windows.Threading.DispatcherPriority.Background);
         }
 
         private void InitColumns(int count)

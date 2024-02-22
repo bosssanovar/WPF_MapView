@@ -26,21 +26,6 @@
                   CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False"
                   CanUserResizeRows="False" CanUserSortColumns="False"
                   VirtualizingPanel.ScrollUnit="Pixel" MaxWidth="2000" MaxHeight="1200">
-            <DataGrid.Triggers>
-                <EventTrigger RoutedEvent="DataGrid.Loaded">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
-                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="5, 5, 1800, 900" />
-                                <SplineThicknessKeyFrame KeyTime="00:00:02" Value="5, 5, 800, 400" />
-                                <SplineThicknessKeyFrame KeyTime="00:00:04" Value="5, 5, 400, 200" />
-                                <SplineThicknessKeyFrame KeyTime="00:00:06" Value="5" />
-                            </ThicknessAnimationUsingKeyFrames>
-                        </Storyboard>
-                    </BeginStoryboard>
-
-                </EventTrigger>
-            </DataGrid.Triggers>
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <EventSetter Event="PreviewMouseLeftButtonUp" Handler="DataGridCell_MouseLeftButtonUp"/>
