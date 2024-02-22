@@ -14,8 +14,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Margin="5" Padding="20,3" Content="再表示" HorizontalAlignment="Center" Click="Button_Click"/>
-
         <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Text="DataGrid表示初期化中..." FontSize="20"/>
 
         <DataGrid x:Name="grid" Grid.Row="1" Margin="5" AutoGenerateColumns="False" Visibility="Collapsed"

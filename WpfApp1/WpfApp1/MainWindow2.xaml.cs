@@ -49,15 +49,6 @@ namespace WpfApp1
             }, System.Windows.Threading.DispatcherPriority.Background);
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var next = new MainWindow2();
-            next.Show();
-            App.Current.MainWindow = next;
-
-            this.Close();
-        }
-
         #region 行列の初期化
 
         private void InitColumns(int count)
