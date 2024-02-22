@@ -25,7 +25,8 @@
                   SelectionMode="Extended" SelectionUnit="Cell"
                   CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False" CanUserResizeColumns="False"
                   CanUserResizeRows="False" CanUserSortColumns="False"
-                  VirtualizingPanel.ScrollUnit="Pixel" MaxWidth="2000" MaxHeight="1200">
+                  VirtualizingPanel.ScrollUnit="Pixel" MaxWidth="2000" MaxHeight="1200"
+                  ScrollViewer.ScrollChanged="grid_ScrollChanged">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <EventSetter Event="PreviewMouseLeftButtonUp" Handler="DataGridCell_MouseLeftButtonUp"/>
@@ -52,8 +53,8 @@
                                 
                                 <TextBlock Margin="5" HorizontalAlignment="Center" Text="全体マップ" Foreground="White"/>
                                 
-                                <Canvas x:Name="thumb" Grid.Row="1" Margin="5">
-                                    <Thumb Width="50" Height="50"
+                                <Canvas x:Name="Area_Canvas" Grid.Row="1" Margin="5">
+                                    <Thumb x:Name="Area_Thumb" Width="50" Height="50"
                                            Canvas.Left="0"
                                            Canvas.Top="0"
                                            DragStarted="Thumb_DragStarted2"
@@ -61,7 +62,7 @@
                                            DragDelta="Thumb_DragDelta2">
                                         <Thumb.Template>
                                             <ControlTemplate>
-                                                <Border x:Name="Thumb_Border" BorderBrush="Red" BorderThickness="0" Background="#99000000">
+                                                <Border x:Name="Area_Thumb_Border" BorderBrush="Red" BorderThickness="0" Background="#99000000">
                                                     
                                                 </Border>
                                             </ControlTemplate>

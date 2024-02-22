@@ -64,6 +64,17 @@ namespace WpfApp1
             return scroll;
         }
 
+        public static (double HorizontalRatio, double VerticalRatio) GetScrollAreaRaio(DataGrid grid)
+        {
+            var scroll = GetScrollViewer(grid);
+            if (scroll is null) return (0, 0);
+
+            var gridWidth = scroll.ScrollableWidth;
+            var gridHeight = scroll.ScrollableHeight;
+
+            return ((scroll.HorizontalOffset / gridWidth), (scroll.VerticalOffset / gridHeight));
+        }
+
         public class RowColumnIndex(int rowIndex, int columnIndex)
         {
             public int RowIndex { get; } = rowIndex;

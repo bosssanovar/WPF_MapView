@@ -258,7 +258,7 @@ namespace WpfApp1
             var thumb = sender as Thumb;
             if (null != thumb)
             {
-                var border = thumb.Template.FindName("Thumb_Border", thumb) as Border;
+                var border = thumb.Template.FindName("Area_Thumb_Border", thumb) as Border;
                 if (null != border)
                 {
                     border.BorderThickness = new Thickness(1);
@@ -273,7 +273,7 @@ namespace WpfApp1
             var thumb = sender as Thumb;
             if (null != thumb)
             {
-                var border = thumb.Template.FindName("Thumb_Border", thumb) as Border;
+                var border = thumb.Template.FindName("Area_Thumb_Border", thumb) as Border;
                 if (null != border)
                 {
                     border.BorderThickness = new Thickness(0);
@@ -305,6 +305,26 @@ namespace WpfApp1
             DataGridHelper.MoveScrollTo(grid, Canvas.GetLeft(thumb) / canvas.ActualWidth, Canvas.GetTop(thumb) / canvas.ActualHeight);
 
             e.Handled = true;
+        }
+
+        #endregion
+
+        #region スクロール同期
+
+        private void grid_ScrollChanged(object sender, ScrollChangedEventArgs e)
+        {
+            var mapCanvas = map.Template.FindName("Area_Canvas", map) as Canvas;
+            if (null == mapCanvas) return;
+            var mapThumb = map.Template.FindName("Area_Thumb", map) as Thumb;
+            if (null == mapThumb) return;
+
+            var retios = DataGridHelper.GetScrollAreaRaio(grid);
+
+            var x = mapCanvas.ActualWidth * retios.HorizontalRatio;
+            var y = mapCanvas.ActualHeight * retios.VerticalRatio;
+
+            Canvas.SetLeft(mapThumb, x);
+            Canvas.SetTop(mapThumb, y);
         }
 
         #endregion
