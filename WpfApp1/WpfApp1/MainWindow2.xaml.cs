@@ -49,6 +49,17 @@ namespace WpfApp1
             }, System.Windows.Threading.DispatcherPriority.Background);
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var next = new MainWindow2();
+            next.Show();
+            App.Current.MainWindow = next;
+
+            this.Close();
+        }
+
+        #region 行列の初期化
+
         private void InitColumns(int count)
         {
             grid.Columns.Clear();
@@ -98,6 +109,9 @@ namespace WpfApp1
             };
             grid.SetBinding(DataGrid.ItemsSourceProperty, b);
         }
+        #endregion
+
+        #region 設定値変更
 
         private void DataGridCell_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -168,14 +182,11 @@ namespace WpfApp1
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var next = new MainWindow2();
-            next.Show();
-            App.Current.MainWindow = next;
+        #endregion
 
-            this.Close();
-        }
+        #region 全体マップ
+
+        #region 表示位置
 
 
         private void Thumb_DragStarted(object sender, DragStartedEventArgs e)
@@ -232,6 +243,15 @@ namespace WpfApp1
             }
         }
 
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            Canvas.SetRight(map, 0);
+            Canvas.SetBottom(map, 0);
+        }
+
+        #endregion
+
+        #region スクロール
 
         private void Thumb_DragStarted2(object sender, DragStartedEventArgs e)
         {
@@ -266,31 +286,29 @@ namespace WpfApp1
         private void Thumb_DragDelta2(object sender, DragDeltaEventArgs e)
         {
             var thumb = sender as Thumb;
-            if (null != thumb)
-            {
-                var x = Canvas.GetLeft(thumb) + e.HorizontalChange;
-                var y = Canvas.GetTop(thumb) + e.VerticalChange;
+            if (null == thumb) return;
 
-                var canvas = thumb.Parent as Canvas;
-                if (null != canvas)
-                {
-                    x = Math.Max(x, 0);
-                    y = Math.Max(y, 0);
-                    x = Math.Min(x, canvas.ActualWidth - thumb.ActualWidth);
-                    y = Math.Min(y, canvas.ActualHeight - thumb.ActualHeight);
-                }
+            var x = Canvas.GetLeft(thumb) + e.HorizontalChange;
+            var y = Canvas.GetTop(thumb) + e.VerticalChange;
 
-                Canvas.SetLeft(thumb, x);
-                Canvas.SetTop(thumb, y);
+            var canvas = thumb.Parent as Canvas;
+            if (null == canvas) return;
 
-                e.Handled = true;
-            }
+            x = Math.Max(x, 0);
+            y = Math.Max(y, 0);
+            x = Math.Min(x, canvas.ActualWidth - thumb.ActualWidth);
+            y = Math.Min(y, canvas.ActualHeight - thumb.ActualHeight);
+
+            Canvas.SetLeft(thumb, x);
+            Canvas.SetTop(thumb, y);
+
+            DataGridHelper.MoveScrollTo(grid, Canvas.GetLeft(thumb) / canvas.ActualWidth, Canvas.GetTop(thumb) / canvas.ActualHeight);
+
+            e.Handled = true;
         }
 
-        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            Canvas.SetRight(map, 0);
-            Canvas.SetBottom(map, 0);
-        }
+        #endregion
+
+        #endregion
     }
 }

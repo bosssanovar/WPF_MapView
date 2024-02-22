@@ -44,6 +44,26 @@ namespace WpfApp1
             return ret;
         }
 
+        public static void MoveScrollTo(DataGrid grid, double horizontalRatio,  double verticalRatio)
+        {
+            var scroll = GetScrollViewer(grid);
+            if (scroll is null) return;
+
+            var gridWidth = scroll.ScrollableWidth;
+            var gridHeight = scroll.ScrollableHeight;
+
+            scroll.ScrollToHorizontalOffset(gridWidth * horizontalRatio);
+            scroll.ScrollToVerticalOffset(gridHeight * verticalRatio);
+        }
+
+        public static ScrollViewer? GetScrollViewer(DataGrid grid)
+        {
+            var child = VisualTreeHelper.GetChild(grid, 0) as Decorator;
+            var scroll = child?.Child as ScrollViewer;
+
+            return scroll;
+        }
+
         public class RowColumnIndex(int rowIndex, int columnIndex)
         {
             public int RowIndex { get; } = rowIndex;
